@@ -31,12 +31,14 @@ function convertToCommand(currentCoord, nextCoord) {
 }
 
 exports.play = function*(screen) {
-	let playerCoord = findPlayer(screen);
+	while (true) {
+		let playerCoord = findPlayer(screen);
 
-	let pathFinder = new PathFinder(screen);
-	let path = pathFinder.pathToClosestStarFrom(playerCoord);
+		let pathFinder = new PathFinder(screen);
+		let path = pathFinder.pathToClosestStarFrom(playerCoord);
 
-	if (path.length > 0) {
-		yield convertToCommand(playerCoord, path[0]);
+		if (path.length > 0) {
+			yield convertToCommand(playerCoord, path[0]);
+		}
 	}
 };
