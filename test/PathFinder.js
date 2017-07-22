@@ -86,3 +86,15 @@ QUnit.test('pathToClosestStarFrom()', function(assert){
 		[4, 3]
 	]);
 });
+
+QUnit.test('pathToClosestStarFrom(): cannot move', function(assert){
+	let screen = [
+		['#', '#', '#'],
+		['#', ' ', '#'],
+		['#', '#', '#'],
+	];
+	let pathFinder = new PathFinder(screen);
+	let path = pathFinder.pathToClosestStarFrom([1, 1]);
+
+	assert.deepEqual(path, []);
+});

@@ -9,7 +9,7 @@ class PathFinder {
 		let path = [];
 		let node = this.searchClosestStarNodeTo(coord);
 
-		while (node.parent) {
+		while (node && node.parent) {
 			path.unshift(node.coord);
 			node = node.parent;
 		}
