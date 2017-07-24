@@ -1,6 +1,6 @@
 function findPlayer(screen) {
 	for (let r = 0; r < screen.length; ++r) {
-		for (let c = 0; c < screen.length; ++c) {
+		for (let c = 0; c < screen[0].length; ++c) {
 			if (screen[r][c] === 'A') {
 				return [r, c];
 			}
