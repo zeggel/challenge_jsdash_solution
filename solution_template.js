@@ -39,6 +39,8 @@ exports.play = function*(screen) {
 
 		if (path.length > 0) {
 			yield convertToCommand(playerCoord, path[0]);
+		} else {
+			yield ' ';
 		}
 	}
 };
