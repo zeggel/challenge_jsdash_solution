@@ -32,13 +32,12 @@ function convertToCommand(currentCoord, nextCoord) {
 
 exports.play = function*(screen) {
 	while (true) {
-		let playerCoord = findPlayer(screen);
-
-		let pathFinder = new PathFinder(screen);
-		let path = pathFinder.pathToClosestStarFrom(playerCoord);
+		let world = new World(screen);
+		let pathFinder = new AStar(world);
+		let path = pathFinder.pathToClosestStar();
 
 		if (path.length > 0) {
-			yield convertToCommand(playerCoord, path[0]);
+			yield convertToCommand(world.getPlayerPosition(), path[0]);
 		} else {
 			yield ' ';
 		}

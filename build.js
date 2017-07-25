@@ -6,7 +6,9 @@ let outputFile = fs.openSync(outputFileName, 'w');
 
 let srcFileNames = [
 	'./src/PriorityQueue.js',
-	'./src/PathFinder.js',
+	'./src/World.js',
+	'./src/AStar.js',
+	//'./src/PathFinder.js',
 	'./solution_template.js',
 ];
 

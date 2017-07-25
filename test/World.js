@@ -29,3 +29,11 @@ QUnit.test('getFlyPositions()', function(assert){
 		[3, 2]
 	]);
 });
+
+QUnit.test('calcDistance()', function(assert){
+	assert.equal(world.calcDistance([3, 1], [1, 3]), 4);
+});
+
+QUnit.test('findClosestStar()', function(assert){
+	assert.deepEqual(world.findClosestStar(), [1, 3]);
+});

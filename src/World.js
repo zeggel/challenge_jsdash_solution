@@ -37,6 +37,40 @@ class World {
 	getFlyPositions() {
 		return this.flyPositions;
 	}
+
+	getObjectByPosition(position) {
+		if (this.map[position[0]] === undefined) {
+			return undefined;
+		}
+		return this.map[position[0]][position[1]];
+	}
+
+	calcDistance(from, to) {
+		return Math.abs(from[0] - to[0]) + Math.abs(from[1] - to[1]);
+	}
+
+	findClosestPosition(position, targetPositions) {
+		if (targetPositions.length === 0) {
+			return null;
+		}
+
+		let minPosition = null;
+		let minDistance = null;
+		for (let i = 0; i < targetPositions.length; ++i) {
+			let targetPosition = targetPositions[i];
+			let distance = this.calcDistance(position, targetPosition);
+			if (minDistance === null || distance < minDistance) {
+				minDistance = distance;
+				minPosition = targetPosition;
+			}
+		}
+
+		return minPosition;
+	}
+
+	findClosestStar() {
+		return this.findClosestPosition(this.playerPosition, this.starPositions);
+	}
 }
 
 module.exports = World;
