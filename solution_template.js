@@ -1,15 +1,3 @@
-function findPlayer(screen) {
-	for (let r = 0; r < screen.length; ++r) {
-		for (let c = 0; c < screen[0].length; ++c) {
-			if (screen[r][c] === 'A') {
-				return [r, c];
-			}
-		}
-	}
-
-	throw 'Cannot find player on screen';
-}
-
 function convertToCommand(currentCoord, nextCoord) {
 	let dr = currentCoord[0] - nextCoord[0];
 	let dc = currentCoord[1] - nextCoord[1];
