@@ -1,6 +1,6 @@
 class World {
-	constructor(screen) {
-		this.map = screen.slice(0, -1); // In the screen last row is status string
+	constructor(map) {
+		this.map = map;
 		this.playerPosition = null;
 		this.starPositions = [];
 		this.flyPositions = [];

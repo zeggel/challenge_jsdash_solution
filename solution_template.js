@@ -20,7 +20,7 @@ function convertToCommand(currentCoord, nextCoord) {
 
 exports.play = function*(screen) {
 	while (true) {
-		let world = new World(screen);
+		let world = new World(screen.slice(0, -1));  // In the screen last row is status string
 		let pathFinder = new PathFinder(world);
 		let path = pathFinder.pathToClosestStar();
 
