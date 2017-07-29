@@ -5,6 +5,7 @@ class World {
 		this.starPositions = [];
 		this.flyPositions = [];
 		this.initPositions();
+		this.markDangerPositions();
 	}
 
 	initPositions() {
@@ -21,6 +22,19 @@ class World {
 					case '/':
 						this.flyPositions.push([row, col]);
 						break;
+				}
+			}
+		}
+	}
+
+	markDangerPositions() {
+		let fallableThings = ['*', 'O'];
+		for (let row = 2; row < this.map.length - 1; ++row) {
+			for (let col = 1; col < this.map[0].length - 1; ++col) {
+				let isSpacePosition = this.getObjectByPosition([row, col]) === ' ';
+				let isFallableAbove = fallableThings.indexOf(this.getObjectByPosition([row - 1, col])) >= 0;
+				if (isSpacePosition && isFallableAbove) {
+					this.map[row] = this.map[row].substr(0, col) + 'D' + this.map[row].substr(col + 1);
 				}
 			}
 		}

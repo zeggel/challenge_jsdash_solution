@@ -37,3 +37,39 @@ QUnit.test('calcDistance()', function(assert){
 QUnit.test('findClosestStar()', function(assert){
 	assert.deepEqual(world.findClosestStar(), [1, 3]);
 });
+
+QUnit.test('without danger position', function(assert) {
+	let map = [
+		'###',
+		'# #',
+		'# #',
+		'###',
+	];
+	let world = new World(map);
+	let expected = [
+		'###',
+		'# #',
+		'# #',
+		'###',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
+
+QUnit.test('mark danger position', function(assert) {
+	let map = [
+		'###',
+		'#O#',
+		'# #',
+		'###',
+	];
+	let world = new World(map);
+	let expected = [
+		'###',
+		'#O#',
+		'#D#',
+		'###',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
