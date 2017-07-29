@@ -4,11 +4,11 @@ const World = require('../src/World.js');
 QUnit.module('PathFinder');
 
 let map = [
-	['#', '#', '#', '#', '#'],
-	['#', 'A', ':', '*', '#'],
-	['#', ' ', '*', '/', '#'],
-	['#', '*', '/', '#', '#'],
-	['#', '#', '#', '#', '#']
+	'#####',
+	'#A:*#',
+	'# */#',
+	'#*/##',
+	'#####'
 ];
 let world = new World(map);
 
@@ -26,9 +26,9 @@ QUnit.test('isCoordInList()', function(assert){
 
 QUnit.test('expandNode()', function(assert){
 	let screen = [
-		['#', '#', '#', ':'],
-		['#', 'A', '*', '#'],
-		['#', '#', '#', '#']
+		'###:',
+		'#A*#',
+		'####'
 	];
 	let world = new World(screen);
 	let pathFinder = new PathFinder(world);
@@ -57,9 +57,9 @@ QUnit.test('expandNode()', function(assert){
 
 QUnit.test('searchPathNode()', function(assert){
 	let screen = [
-		['#', '#', '#', '#'],
-		['#', 'A', '*', '#'],
-		['#', '#', '#', '#']
+		'####',
+		'#A*#',
+		'####'
 	];
 	let pathFinder = new PathFinder(new World(screen));
 	let node = pathFinder.searchPathNode([1, 1], [1, 2]);
@@ -79,12 +79,12 @@ QUnit.test('searchPathNode()', function(assert){
 
 QUnit.test('pathToClosestStar()', function(assert){
 	let screen = [
-		['#', '#', '#', '#', '#', '#', '#'],
-		['#', ' ', ':', ':', ':', ' ', '#'],
-		['#', ' ', '+', '+', ' ', ' ', '#'],
-		['#', ' ', '+', ':', ' ', '#', '#'],
-		['#', 'A', '+', '*', '+', '#', '#'],
-		['#', '#', '#', '#', '#', '#', '#'],
+		'#######',
+		'# ::: #',
+		'# ++  #',
+		'# +: ##',
+		'#A+*+##',
+		'#######',
 	];
 	let pathFinder = new PathFinder(new World(screen));
 	let path = pathFinder.pathToClosestStar();
@@ -105,9 +105,9 @@ QUnit.test('pathToClosestStar()', function(assert){
 
 QUnit.test('pathToClosestStar(): cannot move', function(assert){
 	let screen = [
-		['#', '#', '#'],
-		['#', 'A', '#'],
-		['#', '#', '#'],
+		'###',
+		'#A#',
+		'###',
 	];
 	let pathFinder = new PathFinder(new World(screen));
 	let path = pathFinder.pathToClosestStar();
