@@ -1,6 +1,6 @@
 const PriorityQueue = require('./PriorityQueue.js');
 
-class AStar {
+class PathFinder {
 	constructor(world) {
 		this.world = world;
 	}
@@ -11,7 +11,7 @@ class AStar {
 			return [];
 		}
 		let pathNode = this.searchPathNode(this.world.getPlayerPosition(), starPosition);
-		return AStar.convertNodeToPath(pathNode);
+		return PathFinder.convertNodeToPath(pathNode);
 	}
 
 	searchPathNode(from, to) {
@@ -37,7 +37,7 @@ class AStar {
 			closed.push(currentNode.coord);
 			let siblings = this.expandNode(currentNode, to);
 			for (let i = 0; i < siblings.length; ++i) {
-				if (AStar.isCoordInList(siblings[i].coord, closed)) {
+				if (PathFinder.isCoordInList(siblings[i].coord, closed)) {
 					continue;
 				}
 				open.push(siblings[i]);
@@ -63,7 +63,7 @@ class AStar {
 
 	expandNode(node, targetPosition) {
 		let result = [];
-		let siblingsCoord = AStar.getSiblingsCoord(node.coord);
+		let siblingsCoord = PathFinder.getSiblingsCoord(node.coord);
 		let walkableTypes = [' ', ':', '*'];
 
 		for (let i = 0; i < siblingsCoord.length; ++i) {
@@ -104,4 +104,4 @@ class AStar {
 
 }
 
-module.exports = AStar;
+module.exports = PathFinder;

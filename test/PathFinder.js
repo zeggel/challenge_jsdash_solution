@@ -1,7 +1,7 @@
-const AStar = require('../src/AStar.js');
+const PathFinder = require('../src/PathFinder.js');
 const World = require('../src/World.js');
 
-QUnit.module('AStar');
+QUnit.module('PathFinder');
 
 let map = [
 	['#', '#', '#', '#', '#'],
@@ -19,9 +19,9 @@ QUnit.test('isCoordInList()', function(assert){
 		[2, 2]
 	];
 
-	assert.ok(AStar.isCoordInList([0, 0], list));
-	assert.ok(AStar.isCoordInList([1, 1], list));
-	assert.notOk(AStar.isCoordInList([1, 0], list));
+	assert.ok(PathFinder.isCoordInList([0, 0], list));
+	assert.ok(PathFinder.isCoordInList([1, 1], list));
+	assert.notOk(PathFinder.isCoordInList([1, 0], list));
 });
 
 QUnit.test('expandNode()', function(assert){
@@ -31,7 +31,7 @@ QUnit.test('expandNode()', function(assert){
 		['#', '#', '#', '#']
 	];
 	let world = new World(screen);
-	let aStar = new AStar(world);
+	let pathFinder = new PathFinder(world);
 	let node = {
 		coord: [1, 3],
 		g: 0,
@@ -39,7 +39,7 @@ QUnit.test('expandNode()', function(assert){
 		parent: null
 	};
 
-	assert.deepEqual(aStar.expandNode(node, [1, 1]), [
+	assert.deepEqual(pathFinder.expandNode(node, [1, 1]), [
 	{
 		coord: [1, 2],
 		g: 1,
@@ -61,8 +61,8 @@ QUnit.test('searchPathNode()', function(assert){
 		['#', 'A', '*', '#'],
 		['#', '#', '#', '#']
 	];
-	let aStar = new AStar(new World(screen));
-	let node = aStar.searchPathNode([1, 1], [1, 2]);
+	let pathFinder = new PathFinder(new World(screen));
+	let node = pathFinder.searchPathNode([1, 1], [1, 2]);
 
 	assert.deepEqual(node, {
 		coord: [1, 2],
@@ -86,8 +86,8 @@ QUnit.test('pathToClosestStar()', function(assert){
 		['#', 'A', '+', '*', '+', '#', '#'],
 		['#', '#', '#', '#', '#', '#', '#'],
 	];
-	let aStar = new AStar(new World(screen));
-	let path = aStar.pathToClosestStar();
+	let pathFinder = new PathFinder(new World(screen));
+	let path = pathFinder.pathToClosestStar();
 
 	assert.deepEqual(path, [
 		[3, 1],
@@ -109,8 +109,8 @@ QUnit.test('pathToClosestStar(): cannot move', function(assert){
 		['#', 'A', '#'],
 		['#', '#', '#'],
 	];
-	let aStar = new AStar(new World(screen));
-	let path = aStar.pathToClosestStar();
+	let pathFinder = new PathFinder(new World(screen));
+	let path = pathFinder.pathToClosestStar();
 
 	assert.deepEqual(path, []);
 });

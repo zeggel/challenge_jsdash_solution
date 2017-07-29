@@ -21,7 +21,7 @@ function convertToCommand(currentCoord, nextCoord) {
 exports.play = function*(screen) {
 	while (true) {
 		let world = new World(screen);
-		let pathFinder = new AStar(world);
+		let pathFinder = new PathFinder(world);
 		let path = pathFinder.pathToClosestStar();
 
 		if (path.length > 0) {
