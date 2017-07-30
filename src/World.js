@@ -29,12 +29,37 @@ class World {
 
 	markDangerPositions() {
 		let fallableThings = ['*', 'O'];
-		for (let row = 2; row < this.map.length - 1; ++row) {
+		let walkableThings = ['*', ' ', ':'];
+		for (let row = 1; row < this.map.length - 1; ++row) {
 			for (let col = 1; col < this.map[0].length - 1; ++col) {
-				let isSpacePosition = this.getObjectByPosition([row, col]) === ' ';
-				let isFallableAbove = fallableThings.indexOf(this.getObjectByPosition([row - 1, col])) >= 0;
-				if (isSpacePosition && isFallableAbove) {
-					this.map[row] = this.map[row].substr(0, col) + 'D' + this.map[row].substr(col + 1);
+				let isFallable = fallableThings.indexOf(this.getObjectByPosition([row, col])) >= 0;
+				if (isFallable && this.getObjectByPosition([row + 1, col]) === ' ') {
+					this.map[row + 1] = this.map[row + 1].substr(0, col) + 'D' + this.map[row + 1].substr(col + 1);
+					if (walkableThings.indexOf(this.getObjectByPosition([row + 2, col])) >= 0) {
+						this.map[row + 2] = this.map[row + 2].substr(0, col) + 'D' + this.map[row + 2].substr(col + 1);
+					}
+				}
+				let isBelowFallable = fallableThings.indexOf(this.getObjectByPosition([row + 1, col])) >= 0;
+				if (isFallable && isBelowFallable) {
+					let leftSideIsFree = this.getObjectByPosition([row, col - 1]) === ' ' && this.getObjectByPosition([row + 1, col - 1]) === ' ';
+					let rightSideIsFree = this.getObjectByPosition([row, col + 1]) === ' ' && this.getObjectByPosition([row + 1, col + 1]) === ' ';
+					if (leftSideIsFree) {
+						this.map[row + 1] = this.map[row + 1].substr(0, col - 1) + 'D' + this.map[row + 1].substr(col);
+					} else if (rightSideIsFree) {
+						this.map[row + 1] = this.map[row + 1].substr(0, col + 1) + 'D' + this.map[row + 1].substr(col + 2);
+					}
+				}
+
+				let isButerfly = ['/', '|', '\\', '-'].indexOf(this.getObjectByPosition([row, col])) >= 0;
+				if (isButerfly) {
+					this.map[row] = this.map[row].substr(0, col - 1) + 'D' + this.map[row].substr(col);
+					this.map[row] = this.map[row].substr(0, col + 1) + 'D' + this.map[row].substr(col + 2);
+					this.map[row - 1] = this.map[row - 1].substr(0, col) + 'D' + this.map[row - 1].substr(col + 1);
+					this.map[row - 1] = this.map[row - 1].substr(0, col - 1) + 'D' + this.map[row - 1].substr(col);
+					this.map[row - 1] = this.map[row - 1].substr(0, col + 1) + 'D' + this.map[row - 1].substr(col + 2);
+					this.map[row + 1] = this.map[row + 1].substr(0, col) + 'D' + this.map[row + 1].substr(col + 1);
+					this.map[row + 1] = this.map[row + 1].substr(0, col - 1) + 'D' + this.map[row + 1].substr(col);
+					this.map[row + 1] = this.map[row + 1].substr(0, col + 1) + 'D' + this.map[row + 1].substr(col + 2);
 				}
 			}
 		}

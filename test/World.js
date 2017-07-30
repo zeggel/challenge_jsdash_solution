@@ -73,3 +73,104 @@ QUnit.test('mark danger position', function(assert) {
 
 	assert.deepEqual(world.map, expected);
 });
+
+QUnit.test('mark danger position 2', function(assert) {
+	let map = [
+		'###',
+		'#O#',
+		'# #',
+		'# #',
+		'###',
+	];
+	let world = new World(map);
+	let expected = [
+		'###',
+		'#O#',
+		'#D#',
+		'#D#',
+		'###',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
+
+QUnit.test('mark danger position 3', function(assert) {
+	let map = [
+		'###',
+		'#O#',
+		'# #',
+		'#:#',
+		'###',
+	];
+	let world = new World(map);
+	let expected = [
+		'###',
+		'#O#',
+		'#D#',
+		'#D#',
+		'###',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
+
+QUnit.test('mark danger position 4', function(assert) {
+	let map = [
+		'####',
+		'# O#',
+		'# O#',
+		'# :#',
+		'####',
+	];
+	let world = new World(map);
+	let expected = [
+		'####',
+		'# O#',
+		'#DO#',
+		'# :#',
+		'####',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
+
+QUnit.test('mark danger position 5', function(assert) {
+	let map = [
+		'####',
+		'#O #',
+		'#O #',
+		'#: #',
+		'####',
+	];
+	let world = new World(map);
+	let expected = [
+		'####',
+		'#O #',
+		'#OD#',
+		'#: #',
+		'####',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
+
+QUnit.test('mark danger position 6', function(assert) {
+	let map = [
+		'####',
+		'#/ #',
+		'#O #',
+		'#: #',
+		'####',
+	];
+	let world = new World(map);
+	let expected = [
+		'DDD#',
+		'D/D#',
+		'DDD#',
+		'#: #',
+		'####',
+	];
+
+	assert.deepEqual(world.map, expected);
+});
+
