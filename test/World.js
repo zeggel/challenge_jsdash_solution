@@ -165,9 +165,9 @@ QUnit.test('mark danger position 6', function(assert) {
 	let world = new World(map);
 	let expected = [
 		'DDD#',
-		'D/D#',
+		'D/DD',
 		'DDD#',
-		'#: #',
+		'#D #',
 		'####',
 	];
 

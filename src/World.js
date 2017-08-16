@@ -60,6 +60,20 @@ class World {
 					this.map[row + 1] = this.map[row + 1].substr(0, col) + 'D' + this.map[row + 1].substr(col + 1);
 					this.map[row + 1] = this.map[row + 1].substr(0, col - 1) + 'D' + this.map[row + 1].substr(col);
 					this.map[row + 1] = this.map[row + 1].substr(0, col + 1) + 'D' + this.map[row + 1].substr(col + 2);
+
+					if (this.map[row - 2] !== undefined) {
+						this.map[row - 2] = this.map[row - 2].substr(0, col) + 'D' + this.map[row - 2].substr(col + 1);
+					}
+					if (this.map[row + 2] !== undefined) {
+						this.map[row + 2] = this.map[row + 2].substr(0, col) + 'D' + this.map[row + 2].substr(col + 1);
+					}
+					if (this.map[row][col - 2] !== undefined) {
+						this.map[row] = this.map[row].substr(0, col - 2) + 'D' + this.map[row].substr(col - 1);
+					}
+					if (this.map[row][col + 2] !== undefined) {
+						this.map[row] = this.map[row].substr(0, col + 2) + 'D' + this.map[row].substr(col + 3);
+					}
+					
 				}
 			}
 		}
